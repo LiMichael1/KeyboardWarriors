@@ -8,8 +8,7 @@ using namespace std;
 class Progress
 {
 	private:
-		map<string, Result> Results;
-		string id;
+	  string id;
 	public:
 	  Progress();
 	  Progress(string);

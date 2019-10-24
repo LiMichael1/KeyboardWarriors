@@ -3,7 +3,13 @@
 Session::Session()
 {
     date = getTimeStr();
+    string username = "";
+    //do you need the dynamically allocate.
+    TypingTest = Test(); //overload = operator? for Test Objects
+    test_content = "";
+    TimeTaken = 0;
 }
+
 
 Session::~Session()
 {
@@ -12,17 +18,25 @@ Session::~Session()
 
 void Session::StartSession()
 {
-    ifstream test(TypingTest.getContent());
+    if (test_content == "")
+    {
+        throw invalid_argument("Test is empty!\n");
+    }
+    else
+    {
+        
+    }
 }
 
 Result Session::getTestResults()
 {
-
+    //update Results to know what this means.
 }
 
 void Session::selectTest(Difficulty::Level difficulty)
 {
     TypingTest = Test(difficulty);
+    test_content = TypingTest.getContent();
 }
 
 //get time and date

@@ -12,13 +12,16 @@ using namespace std;
 class Session
 {
 private:
-	std::string date;
-	std::string SesssionID;
+  string username;
+	string date;
+	string SesssionID;
 	Test TypingTest;
 	double TimeTaken;
+  string test_content;
 
 public:
   Session();
+  Session(string username);
   ~Session();
   void StartSession();
   Result getTestResults();

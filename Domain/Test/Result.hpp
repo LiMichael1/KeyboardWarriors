@@ -2,18 +2,20 @@
 #include "../Sessions/Session.hpp"
 #include <string>
 #include <vector>
+#include <fstream>
+#include <iostream>
 using namespace std;
 
 class Result
 {
 private:
-	int WPM;
-	std::string id;
+	float WPM;
+	std::string username;
 	std::string sessionID;
 public:
 	Result();
-	Result(int, int, std::string, std::string);
+	Result(int, int, string, string);
 	~Result();
 	vector<string> viewResults();
-
+	void updateResults();
 };

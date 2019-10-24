@@ -27,5 +27,5 @@ Result Progress::locateResult(string res)
 
 double Progress::getAverageWPM()
 {
-
+    
 }

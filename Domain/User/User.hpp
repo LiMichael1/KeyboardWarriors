@@ -6,6 +6,7 @@ using namespace std;
 
 class User
 {
+	
 	private:
 		std::string username;
 		std::string password;
@@ -20,12 +21,13 @@ class User
 	  std::string getUsername();
 	  void setUsername(std::string);
 	  void encryptPassword(std::string);
+	  
 
 
 	  vector<string> getOptions();
 	  Progress viewProgress();
 	  void changePassword(string newPassword);
-	  void makePayment();
+	  bool makePayment();
 	  Session requestTypingTest();
 
 };
