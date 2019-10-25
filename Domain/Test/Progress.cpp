@@ -64,7 +64,7 @@ bool Progress::read_profile()
 				found = found += increase_index;
 				//find WPM and convert from string to float
 				WPM = stof(line.substr(found, line.size()));
-				cout << "Average WPM: " << WPM << endl;
+				//cout << "Average WPM: " << WPM << endl;
 			}
 			//SEARCHING PAST RESULTS
 			found = line.find("history");
