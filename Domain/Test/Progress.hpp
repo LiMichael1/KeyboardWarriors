@@ -21,7 +21,7 @@ class Progress
 	  bool read_profile();
 	  ~Progress();
 	  Result locateResult(string);
-	  double getAverageWPM();
+	  float getAverageWPM();
 	  void updateResults(string, Result);
 	  void print_results();
 };

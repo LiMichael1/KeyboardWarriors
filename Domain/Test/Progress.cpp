@@ -59,11 +59,12 @@ bool Progress::read_profile()
 			size_t found = line.find("WPM\\");
 			if (found != string::npos)
 			{
-				// WPM\\ <-5 spaces + 1 space to get to the number
-				int increase_index = 6;
+				// WPM\\ <-5 spaces 
+				int increase_index = 5;
 				found = found += increase_index;
 				//find WPM and convert from string to float
-				WPM = stof(line.substr(found, line.size() - 1));
+				WPM = stof(line.substr(found, line.size()));
+				cout << "Average WPM: " << WPM << endl;
 			}
 			//SEARCHING PAST RESULTS
 			found = line.find("history");
@@ -73,20 +74,20 @@ bool Progress::read_profile()
 					history = true; //will record next lines in the loop
 			}
 			//history part
-			else
+			if(history)
 			{
 				string lineNext;
 				while (getline(file, lineNext))
 				{
 					//reading history
-					found = line.find("\\");
+					found = lineNext.find("\\");
 					if (found != string::npos)
 					{
-						string session_id = line.substr(0, found);
-						found = found + 3;
-						float one_wpm = stof(line.substr(found, line.size() - 1));
-						cout << "Session ID: " << session_id << endl;
-						cout << "WPM: " << one_wpm << endl;
+						string session_id = lineNext.substr(0, found);
+						found = found + 2;
+						float one_wpm = stof(lineNext.substr(found, lineNext.size() - 1));
+						/*cout << "Session ID: " << session_id << endl;
+						cout << "WPM: " << one_wpm << endl;*/
 						Results[session_id] = one_wpm;
 						total_WPM += one_wpm;
 						number_of_sessions += 1;
@@ -99,7 +100,7 @@ bool Progress::read_profile()
 	return true;
 }
 
-double Progress::getAverageWPM()
+float Progress::getAverageWPM()
 {
 	return WPM;
 }
@@ -115,6 +116,7 @@ void Progress::updateResults(string session_ID, Result res)
 void Progress::print_results()
 {
 	map<string, Result>::iterator it = Results.begin();
+	cout << "Results" << endl;
 	while (it != Results.end())
 	{
 		cout << "Session ID: " << it->first << endl;
@@ -122,4 +124,5 @@ void Progress::print_results()
 
 		it++;
 	}
+	cout << endl;
 }

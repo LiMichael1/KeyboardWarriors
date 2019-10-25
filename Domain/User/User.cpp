@@ -45,7 +45,7 @@ void User::readProfile()
 		size_t found = line.find("\\");
 		if(found != string::npos)
 		{
-			found += 3;
+			found += 2;
 			_username = line.substr(found, line.size() - 1);
 		}
 		//get password
@@ -53,7 +53,7 @@ void User::readProfile()
 		found = line.find("\\");
 		if (found!= string::npos)
 		{
-			found += 3;
+			found += 2;
 			_password = line.substr(found, line.size() - 1);
 		}
 		//get membership
@@ -61,14 +61,14 @@ void User::readProfile()
 		found = line.find("\\");
 		if (found != string::npos)
 		{
-			found += 3;
+			found += 2;
 			string is_member = line.substr(found, found + 1);
 			if (is_member == "1")
 				_membership = true;
 			else if (is_member == "0")
 				_membership = false;
 			else
-				throw invalid_argument("Wrong Value: " + is_member + "\n");
+				throw invalid_argument("Can't determine member. Value -> " + is_member + "\n");
 			//changes the membership if needed
 			membership = _membership;
 		}
