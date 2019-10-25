@@ -3,11 +3,15 @@
 Progress::Progress()
 {
 	WPM = 0;
+	number_of_sessions = 0;
 	username = "";
+	profile_path = "";
 }
 
 Progress::Progress(string _id)
 {
+	WPM = 0;
+	number_of_sessions = 0;
 	username = _id;
 	profile_path = "../../KeyboardWarriorsTypingTestApp/User_Profiles/" + username + ".txt";
 }
@@ -51,8 +55,8 @@ bool Progress::read_profile()
 			size_t found = line.find("WPM");
 			if (found != string::npos)
 			{
-				// "WPM": <-3 spaces + 1 space to get to the number
-				int increase_index = 4;
+				// WPM\\ <-2 spaces + 1 space to get to the number
+				int increase_index = 3;
 				found = found += increase_index;
 				//find WPM and convert from string to float
 				WPM = stof(line.substr(found, line.size() - 1));
@@ -80,6 +84,8 @@ bool Progress::read_profile()
 						cout << "Session ID: " << session_id << endl;
 						cout << "WPM: " << one_wpm << endl;
 						Results[session_id] = one_wpm;
+						total_WPM += one_wpm;
+						number_of_sessions += 1;
 					}
 				}
 			}
@@ -91,4 +97,12 @@ bool Progress::read_profile()
 double Progress::getAverageWPM()
 {
 	return WPM;
+}
+
+void Progress::updateResults(string session_ID, Result res)
+{
+	number_of_sessions += 1;
+	Results[session_ID] = res;
+	total_WPM += res.getWPM();
+	WPM = total_WPM / number_of_sessions;
 }

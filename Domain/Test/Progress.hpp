@@ -13,6 +13,8 @@ class Progress
 		string username;
 		string profile_path;
 		float WPM;
+		int number_of_sessions;
+		float total_WPM;
 	public:
 	  Progress();
 	  Progress(string);
@@ -20,5 +22,5 @@ class Progress
 	  ~Progress();
 	  Result locateResult(string);
 	  double getAverageWPM();
-	 
+	  void updateResults(string, Result);
 };
