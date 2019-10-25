@@ -3,17 +3,22 @@
 #include <map>
 #include <string>
 #include <fstream>
+#include <iostream>
 #include "Result.hpp"
 using namespace std;
 class Progress
 {
 	private:
-	  string id;
+		map<string, Result> Results;
+		string username;
+		string profile_path;
+		float WPM;
 	public:
 	  Progress();
 	  Progress(string);
+	  bool read_profile();
 	  ~Progress();
-	  Result locateResult(std::string);
+	  Result locateResult(string);
 	  double getAverageWPM();
-
+	 
 };
