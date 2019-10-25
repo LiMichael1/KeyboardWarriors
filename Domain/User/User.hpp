@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "../Test/Progress.hpp"
+#include "../Sessions/TypingSession.hpp"
 using namespace std;
 
 class User
@@ -15,19 +16,22 @@ class User
 
 	public:
 	  User();
+	  //previous user
+	  User(string, string);
 	  ~User();
 	  bool getMembership();
 	  void setMembership(bool);
-	  std::string getUsername();
+	  string getUsername();
 	  void setUsername(std::string);
 	  void encryptPassword(std::string);
+	  void readProfile();
 	  
 
 
 	  vector<string> getOptions();
-	  Progress viewProgress();
+	  void viewProgress();
 	  void changePassword(string newPassword);
 	  bool makePayment();
-	  Session requestTypingTest();
+	  TypingSession requestTypingTest();
 
 };
