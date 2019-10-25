@@ -23,4 +23,5 @@ class Progress
 	  Result locateResult(string);
 	  double getAverageWPM();
 	  void updateResults(string, Result);
+	  void print_results();
 };

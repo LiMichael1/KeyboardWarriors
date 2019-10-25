@@ -6,13 +6,10 @@ using namespace std;
 class Test
 {
 private:
-	Difficulty::Level difficulty;
-	std::string content;
-	std::string id;
-	std::string title;
+	double WPM;
 public:
   Test();
-  Test(Difficulty::Level);
   ~Test();
-  std::string getContent();
+  void beginTest(string input);
+  double calculateWPM(string filename, double duration);
 };

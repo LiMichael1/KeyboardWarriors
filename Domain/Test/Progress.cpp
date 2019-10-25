@@ -14,6 +14,10 @@ Progress::Progress(string _id)
 	number_of_sessions = 0;
 	username = _id;
 	profile_path = "../../KeyboardWarriorsTypingTestApp/User_Profiles/" + username + ".txt";
+	if (!read_profile())
+		throw invalid_argument("Profile does not exist in database.\n");
+	else
+		cout << "Welcome Back, " << username << endl;
 }
 
 Progress::~Progress()
@@ -52,11 +56,11 @@ bool Progress::read_profile()
 		{
 			//SEARCHING FOR WPM 
 			//not the correct string to find
-			size_t found = line.find("WPM");
+			size_t found = line.find("WPM\\");
 			if (found != string::npos)
 			{
-				// WPM\\ <-2 spaces + 1 space to get to the number
-				int increase_index = 3;
+				// WPM\\ <-5 spaces + 1 space to get to the number
+				int increase_index = 6;
 				found = found += increase_index;
 				//find WPM and convert from string to float
 				WPM = stof(line.substr(found, line.size() - 1));
@@ -66,7 +70,7 @@ bool Progress::read_profile()
 			if (!history)
 			{
 				if (found != string::npos)
-					history = true;
+					history = true; //will record next lines in the loop
 			}
 			//history part
 			else
@@ -90,6 +94,7 @@ bool Progress::read_profile()
 				}
 			}
 		}
+		file.close();
 	}
 	return true;
 }
@@ -105,4 +110,16 @@ void Progress::updateResults(string session_ID, Result res)
 	Results[session_ID] = res;
 	total_WPM += res.getWPM();
 	WPM = total_WPM / number_of_sessions;
+}
+
+void Progress::print_results()
+{
+	map<string, Result>::iterator it = Results.begin();
+	while (it != Results.end())
+	{
+		cout << "Session ID: " << it->first << endl;
+		cout << "WPM: " << it->second.getWPM() << endl << endl;
+
+		it++;
+	}
 }
