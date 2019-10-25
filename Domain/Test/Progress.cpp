@@ -67,7 +67,21 @@ bool Progress::read_profile()
 			//history part
 			else
 			{
-
+				string lineNext;
+				while (getline(file, lineNext))
+				{
+					//reading history
+					found = line.find("\\");
+					if (found != string::npos)
+					{
+						string session_id = line.substr(0, found);
+						found = found + 3;
+						float one_wpm = stof(line.substr(found, line.size() - 1));
+						cout << "Session ID: " << session_id << endl;
+						cout << "WPM: " << one_wpm << endl;
+						Results[session_id] = one_wpm;
+					}
+				}
 			}
 		}
 	}
